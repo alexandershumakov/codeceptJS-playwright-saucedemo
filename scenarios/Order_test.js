@@ -46,11 +46,11 @@ Feature('Order');
 //
 // });
 
-Scenario("second test", ({I}) => {
-    I.amOnPage('/');
-    I.fillField("//input[contains(@id,'user-name')]", "standard_user");
-    I.fillField("//input[contains(@id,'password')]", secret('secret_sauce'));
-    I.click("//input[contains(@id,'login-button')]");
+Scenario("second test", ({I, loginPage}) => {
+
+    loginPage.open();
+    loginPage.login("standard_user", secret('secret_sauce'));
+
 
     I.click("//div[contains(text(),'Sauce Labs Fleece Jacket')]");
 
@@ -84,11 +84,9 @@ Scenario("second test", ({I}) => {
 
 }).tag("test1")
 
-Scenario("third test", ({I}) => {
-    I.amOnPage('/');
-    I.fillField("//input[contains(@id,'user-name')]", "standard_user");
-    I.fillField("//input[contains(@id,'password')]", secret('secret_sauce'));
-    I.click("//input[contains(@id,'login-button')]");
+Scenario("third test", ({I, loginPage}) => {
+    loginPage.open();
+    loginPage.login("standard_user", secret('secret_sauce'));
 
     I.waitInUrl("/inventory");
     I.selectOption("//select[contains(@class,'product_sort_container')]", "Name (Z to A)");
