@@ -46,68 +46,47 @@ Feature('Order');
 //
 // });
 
-Scenario("second test", ({I, loginPage}) => {
+Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
+
+    let product = { coast: "$49.99", name: "Sauce Labs Fleece Jacket" }
 
     loginPage.open();
     loginPage.login("standard_user", secret('secret_sauce'));
 
+    productPage.openProductCard();
+    productPage.addProductToCart('1');
 
-    I.click("//div[contains(text(),'Sauce Labs Fleece Jacket')]");
+    cartPage.openCart();
+    cartPage.completeProduct(product);
 
-    I.waitInUrl("/inventory-item.html?id=5");
-    I.click("//button[contains(@id,'add-to-cart-sauce-labs-fleece-jacket')]");
-    I.waitForVisible("//a[contains(@class,'shopping_cart_link')]");
-    I.see("1", "//span[contains(@class,'shopping_cart_badge')]");
-    I.click("//a[contains(@class,'shopping_cart_link')]");
+    checkoutFirstPage.fillAddress();
 
-    I.waitInUrl("/cart");
-    I.see("Sauce Labs Fleece Jacket", "//div[contains(text(),'Sauce Labs Fleece Jacket')]");
-    I.see("$49.99", "//div[contains(@class,'inventory_item_price')]");
-    I.click("//button[contains(@id,'checkout')]");
+    checkoutSecondPage.checkProduct(product);
 
-    I.waitInUrl("/checkout-step-one");
-    I.fillField("//input[contains(@id,'first-name')]", "Alex");
-    I.fillField("//input[contains(@id,'last-name')]", "Shumakov");
-    I.fillField("//input[contains(@id,'postal-code')]", "40000");
-    I.click("//input[contains(@id,'continue')]");
+    checkoutCompletePage.completeOrder();
 
-    I.waitInUrl("/checkout-step-two");
-    I.see("Sauce Labs Fleece Jacket", "//div[contains(text(),'Sauce Labs Fleece Jacket')]");
-    I.see("$49.99", "//div[contains(@class,'inventory_item_price')]");
-    I.click("//button[contains(@id,'finish')]");
-
-    I.waitInUrl("/checkout-complete");
-    I.see("THANK YOU FOR YOUR ORDER", "//h2[contains(text(),'THANK YOU FOR YOUR ORDER')]");
-    I.click("//button[contains(@id,'back-to-products')]");
-
-    I.waitInUrl("/inventory");
+    inventoryPage.viewAllProducts();
 
 }).tag("test1")
 
-Scenario("third test", ({I, loginPage}) => {
+Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
+
+    let productsNames = { firstProduct: "Test.allTheThings() T-Shirt (Red)", secondProduct: "Sauce Labs Onesie"}
+    let numberOfProducts = { countOfProducts: 2, countOfProducts2: "1" }
+
     loginPage.open();
     loginPage.login("standard_user", secret('secret_sauce'));
 
-    I.waitInUrl("/inventory");
-    I.selectOption("//select[contains(@class,'product_sort_container')]", "Name (Z to A)");
-    I.see("Test.allTheThings() T-Shirt (Red)", "//div[contains(text(),'Test.allTheThings() T-Shirt (Red)')]");
-    I.see("Sauce Labs Onesie", "//div[contains(text(),'Sauce Labs Onesie')]");
-    I.click("//button[contains(@id,'add-to-cart-test.allthethings()-t-shirt-(red)')]");
-    I.click("//button[contains(@id,'add-to-cart-sauce-labs-onesie')]");
-    I.waitForVisible("//a[contains(@class,'shopping_cart_link')]");
-    I.see("2", "//span[contains(@class,'shopping_cart_badge')]");
-    I.click("//a[contains(@class,'shopping_cart_link')]");
+    inventoryPage.viewAllProducts();
+    inventoryPage.sortAllProducts();
+    inventoryPage.addProducts(productsNames);
+    inventoryPage.goToCart(numberOfProducts);
 
-    I.waitInUrl("/cart");
-    I.see("Test.allTheThings() T-Shirt (Red)", "//div[contains(text(),'Test.allTheThings() T-Shirt (Red)')]");
-    I.see("Sauce Labs Onesie", "//div[contains(text(),'Sauce Labs Onesie')]");
-    I.click("//button[contains(@id,'remove-sauce-labs-onesie')]");
-    I.see("1", "//span[contains(@class,'shopping_cart_badge')]");
-    I.click("//button[contains(@id,'remove-test.allthethings()-t-shirt-(red)')]");
-    I.click("//button[contains(@id,'react-burger-menu-btn')]");
-    I.click("//a[contains(@id,'logout_sidebar_link')]");
+    cartPage.openCart();
+    cartPage.removeProducts(productsNames,numberOfProducts);
+    cartPage.returnToProductPage();
 
-    I.waitInUrl("/");
+    loginPage.end();
 
 }).tag("test2")
 

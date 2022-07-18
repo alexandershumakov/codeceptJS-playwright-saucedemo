@@ -14,5 +14,9 @@ module.exports = {
         I.fillField(this.userNameField, userName);
         I.fillField(this.passwordField, password);
         I.click(this.loginButton);
+    },
+
+    end () {
+        I.waitInUrl("/");
     }
 }
