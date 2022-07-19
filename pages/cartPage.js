@@ -14,21 +14,33 @@ module.exports = {
     menuButton: "//button[contains(@id,'react-burger-menu-btn')]",
     logoutLink: "//a[contains(@id,'logout_sidebar_link')]",
 
-    completeProduct (product) {
-        I.see(product.name, this.nameOfProduct);
-        I.see(product.coast, this.priceOfProduct);
-        I.click(this.checkoutButton);
-    },
-
     openCart () {
         I.waitInUrl(this.cartUrl);
     },
 
-    removeProducts (productsNames, numberOfProducts) {
+    assertProduct (product) {
+        I.see(product.name, this.nameOfProduct);
+        I.see(product.coast, this.priceOfProduct);
+    },
+
+    completeProduct () {
+        I.click(this.checkoutButton);
+    },
+
+    assertTwoProducts (productsNames) {
         I.see(productsNames.firstProduct, this.nameOfFirstProduct);
         I.see(productsNames.secondProduct, this.nameOfSecondProduct);
+    },
+
+    removeFirstProduct () {
         I.click(this.removeButtonForFirstProduct);
+    },
+
+    assertCountOfProducts (numberOfProducts) {
         I.see(numberOfProducts.countOfProducts2, this.cartBadge);
+    },
+
+    removeSecondProduct () {
         I.click(this.removeButtonForSecondProduct);
     },
 

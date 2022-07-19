@@ -12,11 +12,22 @@ module.exports = {
         I.click(this.productName);
     },
 
-    addProductToCart (numberOfProducts) {
+    waitForOpened () {
         I.waitInUrl(this.productUrl);
+    },
+    addProductToCart () {
         I.click(this.productAddButton);
+    },
+
+    waitForVisible () {
         I.waitForVisible(this.cartLink);
+    },
+
+    assertNumberOfProducts (numberOfProducts) {
         I.see(numberOfProducts, this.cartBadge);
+    },
+
+    goToCart () {
         I.click(this.cartLink);
     }
 

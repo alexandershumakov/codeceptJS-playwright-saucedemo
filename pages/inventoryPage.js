@@ -12,7 +12,7 @@ module.exports = {
     cartLink: "//a[contains(@class,'shopping_cart_link')]",
     productsCounter: "//span[contains(@class,'shopping_cart_badge')]",
 
-    viewAllProducts () {
+    waitAllProducts () {
         I.waitInUrl("/inventory");
     },
 
@@ -20,21 +20,27 @@ module.exports = {
         I.selectOption(this.dropdownButton, "Name (Z to A)");
     },
 
-    addProducts (productsNames) {
+    assertProducts (productsNames) {
         I.see(productsNames.firstProduct, this.nameOfFirstProduct);
         I.see(productsNames.secondProduct, this.nameOfSecondProduct);
+    },
+
+    addProducts () {
         I.click(this.firstProductButton);
         I.click(this.secondProductButton);
     },
 
-    goToCart (numberOfProducts) {
+    waitForVisible () {
         I.waitForVisible(this.cartLink);
+    },
+
+    assertCountOfProducts (numberOfProducts) {
         I.see(numberOfProducts.countOfProducts, this.productsCounter);
+    },
+
+    goToCart () {
         I.click(this.cartLink);
     }
-
-
-
 
     // insert your locators and methods here
 }

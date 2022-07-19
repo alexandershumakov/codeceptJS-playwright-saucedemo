@@ -1,3 +1,4 @@
+
 Feature('Order');
 
 // Scenario('first test', async ({I}) => {
@@ -46,26 +47,37 @@ Feature('Order');
 //
 // });
 
+Before (({I, loginPage}) => {
+    I.login("standard_user", secret('secret_sauce'));
+})
+
 Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
 
     let product = { coast: "$49.99", name: "Sauce Labs Fleece Jacket" }
 
-    loginPage.open();
-    loginPage.login("standard_user", secret('secret_sauce'));
-
     productPage.openProductCard();
-    productPage.addProductToCart('1');
+    productPage.waitForOpened();
+    productPage.addProductToCart();
+    productPage.waitForVisible();
+    productPage.assertNumberOfProducts(1);
+    productPage.goToCart();
 
     cartPage.openCart();
-    cartPage.completeProduct(product);
+    cartPage.assertProduct(product);
+    cartPage.completeProduct();
 
+    checkoutFirstPage.waitForOpened();
     checkoutFirstPage.fillAddress();
 
-    checkoutSecondPage.checkProduct(product);
+    checkoutSecondPage.waitCheckoutSecondPage();
+    checkoutSecondPage.assertProduct(product);
+    checkoutSecondPage.checkProduct();
 
+    checkoutCompletePage.waitForOpened();
+    checkoutCompletePage.assertCompleteOrder();
     checkoutCompletePage.completeOrder();
 
-    inventoryPage.viewAllProducts();
+    inventoryPage.waitAllProducts();
 
 }).tag("test1")
 
@@ -74,21 +86,28 @@ Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
     let productsNames = { firstProduct: "Test.allTheThings() T-Shirt (Red)", secondProduct: "Sauce Labs Onesie"}
     let numberOfProducts = { countOfProducts: 2, countOfProducts2: "1" }
 
-    loginPage.open();
-    loginPage.login("standard_user", secret('secret_sauce'));
 
-    inventoryPage.viewAllProducts();
+
+    inventoryPage.waitAllProducts();
     inventoryPage.sortAllProducts();
-    inventoryPage.addProducts(productsNames);
-    inventoryPage.goToCart(numberOfProducts);
+    inventoryPage.assertProducts(productsNames);
+    inventoryPage.addProducts();
+    inventoryPage.waitForVisible();
+    inventoryPage.assertCountOfProducts(numberOfProducts);
+    inventoryPage.goToCart();
 
     cartPage.openCart();
-    cartPage.removeProducts(productsNames,numberOfProducts);
+    cartPage.assertTwoProducts(productsNames);
+    cartPage.removeFirstProduct();
+    cartPage.assertCountOfProducts(numberOfProducts);
+    cartPage.removeSecondProduct();
     cartPage.returnToProductPage();
 
-    loginPage.end();
+    loginPage.waitForOpen();
 
 }).tag("test2")
 
-
+// After(({}) => {
+//
+// })
 

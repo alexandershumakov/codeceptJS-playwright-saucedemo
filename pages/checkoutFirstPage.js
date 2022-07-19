@@ -8,9 +8,11 @@ module.exports = {
     postcodeOfPayer: "//input[contains(@id,'postal-code')]",
     continueButton: "//input[contains(@id,'continue')]",
 
+    waitForOpened () {
+        I.waitInUrl(this.checkoutFirstUrl);
+    },
 
     fillAddress () {
-        I.waitInUrl(this.checkoutFirstUrl);
         I.fillField(this.firstnameOfPayer, "Alex");
         I.fillField(this.surnameOfPayer, "Shumakov");
         I.fillField(this.postcodeOfPayer, "40000");

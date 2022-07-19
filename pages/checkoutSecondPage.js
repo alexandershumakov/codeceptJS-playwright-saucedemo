@@ -7,10 +7,16 @@ module.exports = {
     checkoutPriceOfProduct: "//div[contains(@class,'inventory_item_price')]",
     finishButton: "//button[contains(@id,'finish')]",
 
-    checkProduct (product) {
+    waitCheckoutSecondPage () {
         I.waitInUrl(this.checkoutSecondUrl);
+    },
+
+    assertProduct (product) {
         I.see(product.name, this.checkoutNameOfProduct);
         I.see(product.coast, this.checkoutPriceOfProduct);
+    },
+
+    checkProduct () {
         I.click(this.finishButton);
     }
 
