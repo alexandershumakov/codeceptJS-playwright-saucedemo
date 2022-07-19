@@ -12,10 +12,10 @@ module.exports = {
         I.waitInUrl(this.checkoutFirstUrl);
     },
 
-    fillAddress () {
-        I.fillField(this.firstnameOfPayer, "Alex");
-        I.fillField(this.surnameOfPayer, "Shumakov");
-        I.fillField(this.postcodeOfPayer, "40000");
+    fillAddress (userData) {
+        I.fillField(this.firstnameOfPayer, userData.firstnameOfPayer);
+        I.fillField(this.surnameOfPayer, userData.surnameOfPayer);
+        I.fillField(this.postcodeOfPayer, userData.postcodeOfPayer);
         I.click(this.continueButton);
     }
 

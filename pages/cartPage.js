@@ -28,8 +28,8 @@ module.exports = {
     },
 
     assertTwoProducts (productsNames) {
-        I.see(productsNames.firstProduct, this.nameOfFirstProduct);
-        I.see(productsNames.secondProduct, this.nameOfSecondProduct);
+        I.see(this.nameOfFirstProduct, productsNames.firstProduct);
+        I.see(this.nameOfSecondProduct, productsNames.secondProduct);
     },
 
     removeFirstProduct () {
@@ -37,7 +37,7 @@ module.exports = {
     },
 
     assertCountOfProducts (numberOfProducts) {
-        I.see(numberOfProducts.countOfProducts2, this.cartBadge);
+        I.see(this.cartBadge, numberOfProducts.countOfProducts2);
     },
 
     removeSecondProduct () {
