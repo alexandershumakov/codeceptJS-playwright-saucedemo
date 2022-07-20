@@ -1,4 +1,6 @@
 const {faker} = require('@faker-js/faker');
+const Product = require('../data/productFactory.js');
+const User = require('../data/userFactory.js');
 
 Feature('Order');
 
@@ -53,36 +55,25 @@ Before (({I, loginPage}) => {
 })
 
 Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
-
-    let product = {
-        coast: "$49.99",
-        name: "Sauce Labs Fleece Jacket",
-        id: 5,
-        numberOfProducts: 1
-    };
-
-    let userData = {
-        firstnameOfPayer: faker.name.firstName(),
-        surnameOfPayer: faker.name.lastName(),
-        postcodeOfPayer: faker.address.zipCode(),
-    };
+    let productData = Product.build();
+    let userData = User.build();
 
     productPage.openProductCard();
     productPage.waitForOpened();
     productPage.addProductToCart();
     productPage.waitForVisible();
-    productPage.assertNumberOfProducts(product);
+    productPage.assertNumberOfProducts(productData);
     productPage.goToCart();
 
     cartPage.openCart();
-    cartPage.assertProduct(product);
+    cartPage.assertProduct(productData);
     cartPage.completeProduct();
 
     checkoutFirstPage.waitForOpened();
     checkoutFirstPage.fillAddress(userData);
 
     checkoutSecondPage.waitCheckoutSecondPage();
-    checkoutSecondPage.assertProduct(product);
+    checkoutSecondPage.assertProduct(productData);
     checkoutSecondPage.checkProduct();
 
     checkoutCompletePage.waitForOpened();
@@ -98,6 +89,7 @@ Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
     let productsNames = {
         firstProduct: "Test.allTheThings() T-Shirt (Red)",
         secondProduct: "Sauce Labs Onesie"}
+
     let numberOfProducts = {
         countOfProducts: "2",
         countOfProducts2: "1" }
