@@ -1,4 +1,3 @@
-const {faker} = require('@faker-js/faker');
 
 Feature('Order');
 
@@ -54,24 +53,13 @@ Before (({I, loginPage}) => {
 
 Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
 
-    let product = {
-        coast: "$49.99",
-        name: "Sauce Labs Fleece Jacket",
-        id: 5,
-        numberOfProducts: 1
-    };
-
-    let userData = {
-        firstnameOfPayer: faker.name.firstName(),
-        surnameOfPayer: faker.name.lastName(),
-        postcodeOfPayer: faker.address.zipCode(),
-    };
+    let product = { coast: "$49.99", name: "Sauce Labs Fleece Jacket" }
 
     productPage.openProductCard();
     productPage.waitForOpened();
     productPage.addProductToCart();
     productPage.waitForVisible();
-    productPage.assertNumberOfProducts(product);
+    productPage.assertNumberOfProducts(1);
     productPage.goToCart();
 
     cartPage.openCart();
@@ -79,7 +67,7 @@ Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage
     cartPage.completeProduct();
 
     checkoutFirstPage.waitForOpened();
-    checkoutFirstPage.fillAddress(userData);
+    checkoutFirstPage.fillAddress();
 
     checkoutSecondPage.waitCheckoutSecondPage();
     checkoutSecondPage.assertProduct(product);
@@ -95,12 +83,10 @@ Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage
 
 Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
 
-    let productsNames = {
-        firstProduct: "Test.allTheThings() T-Shirt (Red)",
-        secondProduct: "Sauce Labs Onesie"}
-    let numberOfProducts = {
-        countOfProducts: "2",
-        countOfProducts2: "1" }
+    let productsNames = { firstProduct: "Test.allTheThings() T-Shirt (Red)", secondProduct: "Sauce Labs Onesie"}
+    let numberOfProducts = { countOfProducts: 2, countOfProducts2: "1" }
+
+
 
     inventoryPage.waitAllProducts();
     inventoryPage.sortAllProducts();
@@ -121,7 +107,7 @@ Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
 
 }).tag("test2")
 
-After(async ({I}) => {
-    await I.say("Test ended");
-})
+// After(({}) => {
+//
+// })
 

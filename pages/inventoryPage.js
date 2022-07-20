@@ -21,8 +21,8 @@ module.exports = {
     },
 
     assertProducts (productsNames) {
-        I.see(this.nameOfFirstProduct, productsNames.firstProduct);
-        I.see(this.nameOfSecondProduct, productsNames.secondProduct);
+        I.see(productsNames.firstProduct, this.nameOfFirstProduct);
+        I.see(productsNames.secondProduct, this.nameOfSecondProduct);
     },
 
     addProducts () {
@@ -35,7 +35,7 @@ module.exports = {
     },
 
     assertCountOfProducts (numberOfProducts) {
-        I.see(this.productsCounter, numberOfProducts.countOfProducts);
+        I.see(numberOfProducts.countOfProducts, this.productsCounter);
     },
 
     goToCart () {
