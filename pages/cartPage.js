@@ -18,9 +18,9 @@ module.exports = {
         I.waitInUrl(this.cartUrl);
     },
 
-    assertProduct (productData) {
-        I.see(productData.name, this.nameOfProduct);
-        I.see(productData.coast, this.priceOfProduct);
+    assertProduct (product) {
+        I.see(product.name, this.nameOfProduct);
+        I.see(product.coast, this.priceOfProduct);
     },
 
     completeProduct () {

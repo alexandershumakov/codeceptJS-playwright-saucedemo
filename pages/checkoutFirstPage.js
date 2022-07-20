@@ -13,7 +13,7 @@ module.exports = {
     },
 
     fillAddress (userData) {
-        I.fillField( this.firstnameOfPayer, userData.firstnameOfPayer);
+        I.fillField(this.firstnameOfPayer, userData.firstnameOfPayer);
         I.fillField(this.surnameOfPayer, userData.surnameOfPayer);
         I.fillField(this.postcodeOfPayer, userData.postcodeOfPayer);
         I.click(this.continueButton);
