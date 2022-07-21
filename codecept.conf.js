@@ -25,7 +25,13 @@ exports.config = {
   },
   include: {
     I: './steps_file.js',
-    loginPage: './pages/loginPage.js'
+    loginPage: './pages/loginPage.js',
+    cartPage: './pages/cartPage.js',
+    checkoutCompletePage: './pages/checkoutCompletePage.js',
+    checkoutFirstPage: './pages/checkoutFirstPage.js',
+    checkoutSecondPage: './pages/checkoutSecondPage.js',
+    inventoryPage: './pages/inventoryPage.js',
+    productPage: './pages/productPage.js'
   },
   bootstrap: null,
   mocha: {},
