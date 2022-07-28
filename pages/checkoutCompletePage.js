@@ -16,7 +16,6 @@ module.exports = {
 
     completeOrder () {
         I.click(this.backToProductsButton);
-    },
-
+    }
 
 }

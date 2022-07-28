@@ -13,6 +13,11 @@ module.exports = {
     cartBadge: "//span[contains(@class,'shopping_cart_badge')]",
     menuButton: "//button[contains(@id,'react-burger-menu-btn')]",
     logoutLink: "//a[contains(@id,'logout_sidebar_link')]",
+    removeButtonForSecondProduct2: "//button[contains(@id,'remove-sauce-labs-bike-light')]",
+    nameOfFirstProduct2: "//div[contains(text(),'Sauce Labs Backpack')]",
+    nameOfSecondProduct2: "//div[contains(text(),'Sauce Labs Bike Light')]",
+    nameOfThirdProduct2: "//div[contains(text(),'Sauce Labs Bolt T-Shirt')]",
+    continueShoppingButton: "//button[contains(@id,'continue-shopping')]",
 
     openCart () {
         I.waitInUrl(this.cartUrl);
@@ -32,6 +37,16 @@ module.exports = {
         I.see(productsNames.secondProduct, this.nameOfSecondProduct);
     },
 
+    assertTwoProducts2 (productsNames2) {
+        I.see(productsNames2.firstProduct, this.nameOfFirstProduct2);
+        I.see(productsNames2.secondProduct, this.nameOfSecondProduct2);
+    },
+
+    assertTwoProducts3 (productsNames3) {
+        I.see(productsNames3.firstProduct, this.nameOfFirstProduct2);
+        I.see(productsNames3.thirdProduct, this.nameOfThirdProduct2);
+    },
+
     removeFirstProduct () {
         I.click(this.removeButtonForFirstProduct);
     },
@@ -40,12 +55,25 @@ module.exports = {
         I.see(numberOfProducts.countOfProducts2, this.cartBadge);
     },
 
+    assertCountOfProducts2 (numberOfProducts) {
+        I.see(numberOfProducts.countOfProducts2, this.cartBadge);
+    },
+
     removeSecondProduct () {
         I.click(this.removeButtonForSecondProduct);
+    },
+
+    removeSecondProduct2 () {
+        I.click(this.removeButtonForSecondProduct2);
     },
 
     returnToProductPage () {
         I.click(this.menuButton);
         I.click(this.logoutLink);
+    },
+
+    continueShopping () {
+       I.click(this.continueShoppingButton);
     }
+
 }

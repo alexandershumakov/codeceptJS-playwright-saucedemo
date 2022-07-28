@@ -21,7 +21,18 @@ exports.config = {
       getPageTimeout: 30000,
       waitForTimeout: 30000,
       windowSize: '1920x1080'
-    }
+    },
+    REST: {
+      endpoint: 'http://site.com/api',
+          timeout: 1200,
+          defaultHeaders: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          }
+    },
+    // APIHelper: {
+    //   require: './helpers/apiHelper.ts',
+    // }
   },
   include: {
     I: './steps_file.js',
@@ -43,6 +54,7 @@ exports.config = {
     screenshotOnFail: {
       enabled: true
     }
-  }
+  },
+  require:  ['ts-node/register']
 
 }

@@ -11,6 +11,11 @@ module.exports = {
     secondProductButton: "//button[contains(@id,'add-to-cart-sauce-labs-onesie')]",
     cartLink: "//a[contains(@class,'shopping_cart_link')]",
     productsCounter: "//span[contains(@class,'shopping_cart_badge')]",
+    firstProductButton2: "//button[contains(@id,'add-to-cart-sauce-labs-backpack')]",
+    secondProductButton2: "//button[contains(@id,'add-to-cart-sauce-labs-bike-light')]",
+    nameOfFirstProduct2: "//div[contains(text(),'Sauce Labs Backpack')]",
+    nameOfSecondProduct2: "//div[contains(text(),'Sauce Labs Bike Light')]",
+    productButton: "//button[contains(@id,'add-to-cart-sauce-labs-bolt-t-shirt')]",
 
     waitAllProducts () {
         I.waitInUrl("/inventory");
@@ -25,9 +30,23 @@ module.exports = {
         I.see(productsNames.secondProduct, this.nameOfSecondProduct);
     },
 
+    assertProducts2 (productsNames2) {
+        I.see(productsNames2.firstProduct, this.nameOfFirstProduct2);
+        I.see(productsNames2.secondProduct, this.nameOfSecondProduct2);
+    },
+
     addProducts () {
         I.click(this.firstProductButton);
         I.click(this.secondProductButton);
+    },
+
+    addProducts2 () {
+        I.click(this.firstProductButton2);
+        I.click(this.secondProductButton2);
+    },
+
+    addProduct3 () {
+        I.click(this.productButton);
     },
 
     waitForVisible () {
@@ -36,6 +55,10 @@ module.exports = {
 
     assertCountOfProducts (numberOfProducts) {
         I.see(numberOfProducts.countOfProducts, this.productsCounter);
+    },
+
+    assertCountOfProducts2 (numberOfProducts2) {
+        I.see(numberOfProducts2.countOfProducts, this.productsCounter);
     },
 
     goToCart () {
