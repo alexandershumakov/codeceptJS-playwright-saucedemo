@@ -187,7 +187,7 @@ Scenario("5 test", ({I, loginPage, inventoryPage, cartPage,checkoutFirstPage,che
 }).tag("test4")
 
 
-// After(({}) => {
-//
-// })
+After(async ({I}) => {
+    await I.say("Test ended");
+})
 
