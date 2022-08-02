@@ -23,8 +23,8 @@ module.exports = {
         I.waitForVisible(this.cartLink);
     },
 
-    assertNumberOfProducts (numberOfProducts) {
-        I.see(numberOfProducts, this.cartBadge);
+    assertNumberOfProducts (productData) {
+        I.see(productData.numberOfProducts, this.cartBadge);
     },
 
     goToCart () {
