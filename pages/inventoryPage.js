@@ -25,14 +25,19 @@ module.exports = {
         I.selectOption(this.dropdownButton, "Name (Z to A)");
     },
 
-    assertProducts (productsNames) {
-        I.see(productsNames.firstProduct, this.nameOfFirstProduct);
-        I.see(productsNames.secondProduct, this.nameOfSecondProduct);
+    assertProducts (productData) {
+        I.see(productData.firstProduct, this.nameOfFirstProduct);
+        I.see(productData.secondProduct, this.nameOfSecondProduct);
     },
 
-    assertProducts2 (productsNames2) {
-        I.see(productsNames2.firstProduct, this.nameOfFirstProduct2);
-        I.see(productsNames2.secondProduct, this.nameOfSecondProduct2);
+    assertProducts2 (productData) {
+        I.see(productData.firstProduct2, this.nameOfFirstProduct2);
+        I.see(productData.secondProduct2, this.nameOfSecondProduct2);
+    },
+
+    assertProducts3 (productData) {
+        I.see(productData.nameFirstProduct, this.nameOfFirstProduct2);
+        I.see(productData.nameSecondProduct, this.nameOfSecondProduct2);
     },
 
     addProducts () {
@@ -53,13 +58,14 @@ module.exports = {
         I.waitForVisible(this.cartLink);
     },
 
-    assertCountOfProducts (numberOfProducts) {
-        I.see(numberOfProducts.countOfProducts, this.productsCounter);
+    assertCountOfProducts (productsData) {
+        I.see(productsData.countOfProducts, this.productsCounter);
     },
 
-    assertCountOfProducts2 (numberOfProducts2) {
-        I.see(numberOfProducts2.countOfProducts, this.productsCounter);
+    assertCountOfProducts2 (productData) {
+        I.see(productData.countOfProducts, this.productsCounter);
     },
+
 
     goToCart () {
         I.click(this.cartLink);

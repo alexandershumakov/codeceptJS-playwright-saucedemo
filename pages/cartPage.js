@@ -23,40 +23,40 @@ module.exports = {
         I.waitInUrl(this.cartUrl);
     },
 
-    assertProduct (product) {
-        I.see(product.name, this.nameOfProduct);
-        I.see(product.coast, this.priceOfProduct);
+    assertProduct (productData) {
+        I.see(productData.name1, this.nameOfProduct);
+        I.see(productData.cost1, this.priceOfProduct);
     },
 
     completeProduct () {
         I.click(this.checkoutButton);
     },
 
-    assertTwoProducts (productsNames) {
-        I.see(productsNames.firstProduct, this.nameOfFirstProduct);
-        I.see(productsNames.secondProduct, this.nameOfSecondProduct);
+    assertTwoProducts (productsData) {
+        I.see(productsData.firstProduct, this.nameOfFirstProduct);
+        I.see(productsData.secondProduct, this.nameOfSecondProduct);
     },
 
-    assertTwoProducts2 (productsNames2) {
-        I.see(productsNames2.firstProduct, this.nameOfFirstProduct2);
-        I.see(productsNames2.secondProduct, this.nameOfSecondProduct2);
+    assertTwoProducts2 (productData) {
+        I.see(productData.firstProduct2, this.nameOfFirstProduct2);
+        I.see(productData.secondProduct2, this.nameOfSecondProduct2);
     },
 
-    assertTwoProducts3 (productsNames3) {
-        I.see(productsNames3.firstProduct, this.nameOfFirstProduct2);
-        I.see(productsNames3.thirdProduct, this.nameOfThirdProduct2);
+    assertTwoProducts3 (productData) {
+        I.see(productData.nameFirstProduct, this.nameOfFirstProduct2);
+        I.see(productData.nameThirdProduct, this.nameOfThirdProduct2);
     },
 
     removeFirstProduct () {
         I.click(this.removeButtonForFirstProduct);
     },
 
-    assertCountOfProducts (numberOfProducts) {
-        I.see(numberOfProducts.countOfProducts2, this.cartBadge);
+    assertCountOfProducts (productData) {
+        I.see(productData.countOfProducts2, this.cartBadge);
     },
 
-    assertCountOfProducts2 (numberOfProducts) {
-        I.see(numberOfProducts.countOfProducts2, this.cartBadge);
+    assertCountOfProducts2 (productData) {
+        I.see(productData.countOfProducts2, this.cartBadge);
     },
 
     removeSecondProduct () {

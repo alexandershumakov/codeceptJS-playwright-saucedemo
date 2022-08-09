@@ -13,9 +13,9 @@ module.exports = {
     },
 
     fillAddress (userData) {
-        I.fillField(this.firstnameOfPayer, userData.name);
-        I.fillField(this.surnameOfPayer, userData.name);
-        I.fillField(this.postcodeOfPayer, userData.address);
+        I.fillField(this.firstnameOfPayer, userData.firstnameOfPayer);
+        I.fillField(this.surnameOfPayer, userData.surnameOfPayer);
+        I.fillField(this.postcodeOfPayer, userData.postcodeOfPayer);
         I.click(this.continueButton);
     }
 

@@ -15,19 +15,19 @@ module.exports = {
         I.waitInUrl(this.checkoutSecondUrl);
     },
 
-    assertProduct (product) {
-        I.see(product.name, this.checkoutNameOfProduct);
-        I.see(product.coast, this.checkoutPriceOfProduct);
+    assertProduct (productData) {
+        I.see(productData.name1, this.checkoutNameOfProduct);
+        I.see(productData.cost1, this.checkoutPriceOfProduct);
     },
 
-    assertProduct2 (product) {
-        I.see(product.name, this.checkoutNameOfProduct2);
-        I.see(product.coast, this.checkoutPriceOfProduct2);
+    assertProduct2 (productData) {
+        I.see(productData.name2, this.checkoutNameOfProduct2);
+        I.see(productData.cost2, this.checkoutPriceOfProduct2);
     },
 
-    assertProduct3 (product2) {
-        I.see(product2.name, this.checkoutNameOfProduct3);
-        I.see(product2.coast, this.checkoutPriceOfProduct3);
+    assertProduct3 (productData) {
+        I.see(productData.nameThirdProduct, this.checkoutNameOfProduct3);
+        I.see(productData.costThirdProduct, this.checkoutPriceOfProduct3);
     },
 
     checkProduct () {

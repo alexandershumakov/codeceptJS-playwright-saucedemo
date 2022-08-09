@@ -2,13 +2,21 @@ const {faker} = require('@faker-js/faker');
 const Product = require('../data/productFactory.js');
 const User = require('../data/userFactory.js');
 
+
 Feature('Order');
 
 Before (({I, loginPage}) => {
     I.login("standard_user", secret('secret_sauce'));
 })
 
-Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
+Scenario("first test", ({I,
+                             loginPage,
+                             productPage,
+                             cartPage,
+                             checkoutFirstPage,
+                             checkoutSecondPage,
+                             checkoutCompletePage,
+                             inventoryPage } ) => {
 
     let productData = Product.build();
     let userData = User.build();
@@ -39,23 +47,25 @@ Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage
 
 }).tag("test1")
 
-Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
+Scenario("second test", ({I,
+                            loginPage,
+                            inventoryPage,
+                            cartPage}) => {
 
-    let productsNames = { firstProduct: "Test.allTheThings() T-Shirt (Red)", secondProduct: "Sauce Labs Onesie"}
-    let numberOfProducts = { countOfProducts: 2, countOfProducts2: "1" }
+    let productData = Product.build();
 
     inventoryPage.waitAllProducts();
     inventoryPage.sortAllProducts();
-    inventoryPage.assertProducts(productsNames);
+    inventoryPage.assertProducts(productData);
     inventoryPage.addProducts();
     inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts(numberOfProducts);
+    inventoryPage.assertCountOfProducts(productData);
     inventoryPage.goToCart();
 
     cartPage.openCart();
-    cartPage.assertTwoProducts(productsNames);
+    cartPage.assertTwoProducts(productData);
     cartPage.removeFirstProduct();
-    cartPage.assertCountOfProducts(numberOfProducts);
+    cartPage.assertCountOfProducts(productData);
     cartPage.removeSecondProduct();
     cartPage.returnToProductPage();
 
@@ -63,29 +73,35 @@ Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
 
 }).tag("test2")
 
-Scenario("4 test", ({I, loginPage, inventoryPage, cartPage,checkoutFirstPage,checkoutSecondPage,checkoutCompletePage}) => {
-    let productsNames2 = { firstProduct: "Sauce Labs Backpack", secondProduct: "Sauce Labs Bike Light"}
-    let numberOfProducts2 = { countOfProducts: "2", countOfProducts2: "1" }
-    let product = { name: "Sauce Labs Backpack", coast: "$29.99" }
+Scenario("third test", ({I,
+                        loginPage,
+                        inventoryPage,
+                        cartPage,
+                        checkoutFirstPage,
+                        checkoutSecondPage,
+                        checkoutCompletePage}) => {
+
+    let productData = Product.build();
+    let userData = User.build();
 
     inventoryPage.waitAllProducts();
-    inventoryPage.assertProducts2(productsNames2);
+    inventoryPage.assertProducts2(productData);
     inventoryPage.addProducts2();
     inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts2(numberOfProducts2);
+    inventoryPage.assertCountOfProducts2(productData);
     inventoryPage.goToCart();
 
     cartPage.openCart();
-    cartPage.assertTwoProducts2(productsNames2);
+    cartPage.assertTwoProducts2(productData);
     cartPage.removeSecondProduct2();
-    cartPage.assertCountOfProducts2(numberOfProducts2);
+    cartPage.assertCountOfProducts2(productData);
     cartPage.completeProduct();
 
     checkoutFirstPage.waitForOpened();
-    checkoutFirstPage.fillAddress();
+    checkoutFirstPage.fillAddress(userData);
 
     checkoutSecondPage.waitCheckoutSecondPage();
-    checkoutSecondPage.assertProduct2(product);
+    checkoutSecondPage.assertProduct2(productData);
     checkoutSecondPage.checkProduct();
 
     checkoutCompletePage.waitForOpened();
@@ -96,28 +112,28 @@ Scenario("4 test", ({I, loginPage, inventoryPage, cartPage,checkoutFirstPage,che
 
 }).tag("test3")
 
-Scenario("5 test", ({I, loginPage, inventoryPage, cartPage,checkoutFirstPage,checkoutSecondPage,checkoutCompletePage}) => {
-    let productsNames3 = {
-        firstProduct: "Sauce Labs Backpack",
-        secondProduct: "Sauce Labs Bike Light",
-        thirdProduct: "Sauce Labs Bolt T-Shirt",
-    }
-    let numberOfProducts2 = { countOfProducts: "2", countOfProducts2: "1" }
-    let product = { name: "Sauce Labs Backpack", coast: "$29.99" }
-    let product2 = { name: "Sauce Labs Bolt T-Shirt", coast: "$15.99"}
+Scenario("4 test", ({I,
+                        loginPage,
+                        inventoryPage,
+                        cartPage,
+                        checkoutFirstPage,
+                        checkoutSecondPage,
+                        checkoutCompletePage}) => {
 
+    let productData = Product.build();
+    let userData = User.build();
 
     inventoryPage.waitAllProducts();
-    inventoryPage.assertProducts2(productsNames3);
+    inventoryPage.assertProducts3(productData);
     inventoryPage.addProducts2();
     inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts2(numberOfProducts2);
+    inventoryPage.assertCountOfProducts2(productData);
     inventoryPage.goToCart();
 
     cartPage.openCart();
-    cartPage.assertTwoProducts2(productsNames3);
+    cartPage.assertTwoProducts2(productData);
     cartPage.removeSecondProduct2();
-    cartPage.assertCountOfProducts2(numberOfProducts2);
+    cartPage.assertCountOfProducts(productData);
     cartPage.continueShopping();
 
     inventoryPage.waitAllProducts();
@@ -125,15 +141,15 @@ Scenario("5 test", ({I, loginPage, inventoryPage, cartPage,checkoutFirstPage,che
     inventoryPage.goToCart();
 
     cartPage.openCart();
-    cartPage.assertTwoProducts3(productsNames3);
+    cartPage.assertTwoProducts3(productData);
     cartPage.completeProduct();
 
     checkoutFirstPage.waitForOpened();
-    checkoutFirstPage.fillAddress();
+    checkoutFirstPage.fillAddress(userData);
 
     checkoutSecondPage.waitCheckoutSecondPage();
-    checkoutSecondPage.assertProduct2(product);
-    checkoutSecondPage.assertProduct3(product2);
+    checkoutSecondPage.assertProduct2(productData);
+    checkoutSecondPage.assertProduct3(productData);
     checkoutSecondPage.checkProduct();
 
     checkoutCompletePage.waitForOpened();
