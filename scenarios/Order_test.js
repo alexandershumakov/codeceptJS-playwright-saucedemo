@@ -51,7 +51,12 @@ Before (({I, loginPage}) => {
     I.login("standard_user", secret('secret_sauce'));
 })
 
-Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
+Scenario("second test", ({I, loginPage,
+                             productPage, cartPage,
+                             checkoutFirstPage,
+                             checkoutSecondPage,
+                             checkoutCompletePage,
+                             inventoryPage } ) => {
 
     let product = { coast: "$49.99", name: "Sauce Labs Fleece Jacket" }
 
