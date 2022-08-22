@@ -1,6 +1,6 @@
 const {faker} = require('@faker-js/faker');
-const Product = require('../data/productFactory.js');
-const User = require('../data/userFactory.js');
+const Product = require('../data/productFactory.ts');
+const User = require('../data/userFactory.ts');
 
 Feature('Order');
 
