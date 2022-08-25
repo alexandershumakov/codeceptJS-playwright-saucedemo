@@ -10,6 +10,8 @@ class CheckoutFirstPage {
     private postcodeOfPayer: Locator = locate ("//input[contains(@id,'postal-code')]").as("Postcode");
     private continueButton: Locator = locate ("//input[contains(@id,'continue')]").as("Continue Button");
 
+    open
+
     waitForOpened () : void {
         I.waitInUrl(this.checkoutFirstUrl);
     }

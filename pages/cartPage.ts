@@ -1,4 +1,6 @@
-import {Locator} from "playwright";
+// import {Locator} from "playwright";
+// @ts-ignore
+import Locator = CodeceptJS.Locator;
 
 const { I } = inject();
 
