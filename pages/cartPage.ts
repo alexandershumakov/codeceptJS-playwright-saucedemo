@@ -1,15 +1,19 @@
 // import {Locator} from "playwright";
 // @ts-ignore
 import Locator = CodeceptJS.Locator;
+import * as url from "url";
+import Page from "./page";
+import Product from "../data/productFactory";
 
 const { I } = inject();
 
-class CartPage {
+// noinspection TypeScriptValidateTypes
+class CartPage extends Page {
 
     private nameOfProduct: Locator = locate ("//div[contains(text(),'Sauce Labs Fleece Jacket')]").as("Product Name");
     private priceOfProduct: Locator = locate ("//div[contains(@class,'inventory_item_price')]").as("Product Price");
     private checkoutButton: Locator = locate ("//button[contains(@id,'checkout')]").as("Checkout Button");
-    private nameOfFirstProduct: Locator = locate ("//div[contains(text(),'Test.allTheThings() T-Shirt (Red)')]").as("First Product Name";)
+    private nameOfFirstProduct: Locator = locate ("//div[contains(text(),'Test.allTheThings() T-Shirt (Red)')]").as("First Product Name");
     private nameOfSecondProduct: Locator = locate ("//div[contains(text(),'Sauce Labs Onesie')]").as("Second Product Name");
     private removeButtonForFirstProduct: Locator = locate ("//button[contains(@id,'remove-sauce-labs-onesie')]").as("Remove Button");
     private removeButtonForSecondProduct: Locator = locate ("//button[contains(@id,'remove-test.allthethings()-t-shirt-(red)')]").as("Remove Button");
@@ -18,33 +22,37 @@ class CartPage {
     private logoutLink: Locator = locate ("//a[contains(@id,'logout_sidebar_link')]").as("Logout Link");
 
     constructor() {
-        super ("/cart");
+        super("/cart");
     }
 
-    openCart () : void {
-        I.waitInUrl(this.cartUrl);
+    waitForOpened () : CartPage {
+        super.waitForOpened();
+        return this;
     }
 
-    assertProduct (productData) {
-        I.see(productData.name, this.nameOfProduct);
-        I.see(productData.coast, this.priceOfProduct);
+    assertProduct (productData: Product) : CartPage {
+        I.see(productData.name1, this.nameOfProduct);
+        I.see(productData.cost1, this.priceOfProduct);
+        return this;
     }
 
     completeProduct () : void {
         I.click(this.checkoutButton);
     }
 
-    assertTwoProducts (productsNames) {
-        I.see(this.nameOfFirstProduct, productsNames.firstProduct);
-        I.see(this.nameOfSecondProduct, productsNames.secondProduct);
+    assertTwoProducts (productData: Product) : CartPage {
+        I.see(productData.firstProduct, this.nameOfFirstProduct);
+        I.see(productData.secondProduct, this.nameOfSecondProduct);
+        return this;
     }
 
     removeFirstProduct () : void {
         I.click(this.removeButtonForFirstProduct);
     }
 
-    assertCountOfProducts (numberOfProducts) {
-        I.see(this.cartBadge, numberOfProducts.countOfProducts2);
+    assertCountOfProducts (productData: Product) : CartPage {
+        I.see(productData.countOfProducts2, this.cartBadge);
+        return this;
     }
 
     removeSecondProduct () : void {
@@ -56,3 +64,5 @@ class CartPage {
         I.click(this.logoutLink);
     }
 }
+
+export default CartPage;

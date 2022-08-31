@@ -1,5 +1,5 @@
 const {faker} = require("@faker-js/faker");
-const Factory = require("rosie").Factory;
+
 
 export default class User {
 
@@ -8,9 +8,9 @@ export default class User {
     zipCode: string;
 
     constructor() {
-        this.firstName = faker.name;
-        this.lastName = faker.name;
-        this.zipCode = faker.address;
+        this.firstName = faker.name.firstName();
+        this.lastName = faker.name.lastName();
+        this.zipCode = faker.address.zipCode();
     }
 }
 
