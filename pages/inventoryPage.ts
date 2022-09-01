@@ -14,6 +14,11 @@ class InventoryPage extends Page {
     private secondProductButton: Locator = locate ("//button[contains(@id,'add-to-cart-sauce-labs-onesie')]").as("Add Second Button");
     private cartLink: Locator = locate ("//a[contains(@class,'shopping_cart_link')]").as("Cart Link");
     private productsCounter: Locator = locate ("//span[contains(@class,'shopping_cart_badge')]").as("Products Counter");
+    private firstProductButton2: Locator = locate ("//button[contains(@id,'add-to-cart-sauce-labs-backpack')]");
+    private secondProductButton2: Locator = locate ("//button[contains(@id,'add-to-cart-sauce-labs-bike-light')]");
+    private nameOfFirstProduct2: Locator = locate ("//div[contains(text(),'Sauce Labs Backpack')]");
+    private nameOfSecondProduct2: Locator = locate ("//div[contains(text(),'Sauce Labs Bike Light')]");
+    private productButton: Locator = locate ("//button[contains(@id,'add-to-cart-sauce-labs-bolt-t-shirt')]");
 
     constructor() {
         super("/inventory");

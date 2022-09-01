@@ -20,6 +20,11 @@ class CartPage extends Page {
     private cartBadge: Locator = locate ("//span[contains(@class,'shopping_cart_badge')]").as("Cart Counter");
     private menuButton: Locator = locate ("//button[contains(@id,'react-burger-menu-btn')]").as("Menu Button");
     private logoutLink: Locator = locate ("//a[contains(@id,'logout_sidebar_link')]").as("Logout Link");
+    private removeButtonForSecondProduct2: Locator = locate ("//button[contains(@id,'remove-sauce-labs-bike-light')]");
+    private nameOfFirstProduct2: Locator = locate ("//div[contains(text(),'Sauce Labs Backpack')]");
+    private nameOfSecondProduct2: Locator = locate ("//div[contains(text(),'Sauce Labs Bike Light')]");
+    private nameOfThirdProduct2: Locator = locate ("//div[contains(text(),'Sauce Labs Bolt T-Shirt')]");
+    private continueShoppingButton: Locator = locate ("//button[contains(@id,'continue-shopping')]");
 
     constructor() {
         super("/cart");
@@ -46,6 +51,16 @@ class CartPage extends Page {
         return this;
     }
 
+    assertTwoProducts2 (productData) {
+        I.see(productData.firstProduct2, this.nameOfFirstProduct2);
+        I.see(productData.secondProduct2, this.nameOfSecondProduct2);
+    }
+
+    assertTwoProducts3 (productData) {
+        I.see(productData.nameFirstProduct, this.nameOfFirstProduct2);
+        I.see(productData.nameThirdProduct, this.nameOfThirdProduct2);
+    }
+
     removeFirstProduct () : void {
         I.click(this.removeButtonForFirstProduct);
     }
@@ -59,9 +74,17 @@ class CartPage extends Page {
         I.click(this.removeButtonForSecondProduct);
     }
 
+    removeSecondProduct2 () {
+        I.click(this.removeButtonForSecondProduct2);
+    }
+
     returnToProductPage () : void {
         I.click(this.menuButton);
         I.click(this.logoutLink);
+    }
+
+    continueShopping () {
+        I.click(this.continueShoppingButton);
     }
 }
 

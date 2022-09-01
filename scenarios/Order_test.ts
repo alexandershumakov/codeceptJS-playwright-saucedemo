@@ -68,7 +68,7 @@ Scenario("third test", ({I,
     cartPage.waitForOpened();
     cartPage.assertTwoProducts2(productData);
     cartPage.removeSecondProduct2();
-    cartPage.assertCountOfProducts2(productData);
+    cartPage.assertCountOfProducts(productData);
     cartPage.completeProduct();
 
     checkoutFirstPage.waitForOpened();
@@ -97,12 +97,8 @@ Scenario("4 test", ({I,
     let productData = new Product;
     let userData = new User;
 
-    inventoryPage.waitForOpened();
-    inventoryPage.assertProducts3(productData);
-    inventoryPage.addProducts2();
-    inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts(productData);
-    inventoryPage.goToCart();
+    inventoryPage.waitForOpened().assertProducts3(productData).addProducts2();
+    inventoryPage.waitForVisible().assertCountOfProducts(productData).goToCart();
 
     cartPage.waitForOpened();
     cartPage.assertTwoProducts2(productData);
