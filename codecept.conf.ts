@@ -24,7 +24,7 @@ exports.config = {
         }
     },
     include: {
-        I: './steps_file.js',
+        I: './steps_file.ts',
         loginPage: './pages/loginPage.ts',
         cartPage: './pages/cartPage.ts',
         checkoutCompletePage: './pages/checkoutCompletePage.ts',
