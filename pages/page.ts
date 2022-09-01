@@ -1,4 +1,4 @@
-import Locator = CodeceptJS.Locator;
+
 import * as CodeceptJS from "codeceptjs";
 const {I} = inject()
 
@@ -15,7 +15,7 @@ export default class Page {
     }
 
     waitForOpened() : void {
-        I.seeInCurrentUrl(this.url);
+        I.waitInUrl(this.url);
     }
 
 }

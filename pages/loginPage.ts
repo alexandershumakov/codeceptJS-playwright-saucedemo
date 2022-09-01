@@ -1,8 +1,9 @@
-import {Locator} from "playwright";
+import Locator = CodeceptJS.Locator;
+import Page from "./page";
 
 const { I } = inject();
 
-class LoginPage {
+class LoginPage extends Page {
 
     private userNameField: Locator = locate ('input#user-name').as("User Name");
     private passwordField: Locator = locate ('input#password').as("Password");
@@ -12,19 +13,18 @@ class LoginPage {
         super ("/");
     }
 
-    // open () : void {
-    //     I.amOnPage('/');
-    // },
+    waitForOpened () : LoginPage {
+        super.waitForOpened();
+        return this;
+    }
 
-    login (username, password) {
+    login (username, password) : LoginPage {
         I.fillField(this.userNameField, username);
         I.fillField(this.passwordField, password);
         I.click(this.loginButton);
-    },
-
-    waitForOpen () : void {
-        I.waitInUrl("/");
+        return this;
     }
+
 }
 
-export = new LoginPage();
+export default LoginPage;

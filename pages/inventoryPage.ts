@@ -1,11 +1,12 @@
-import {Locator} from "playwright";
+import Locator = CodeceptJS.Locator;
+import Page from "./page";
+import Product from "../data/productFactory";
 
 const productNames = require("./inventoryPage");
 const { I } = inject();
 
-class InventoryPage {
+class InventoryPage extends Page {
 
-    allProductsUrl: "/inventory",
     private dropdownButton: Locator = locate ("//select[contains(@class,'product_sort_container')]").as("Dropdown");
     private nameOfFirstProduct: Locator = locate ("//div[contains(text(),'Test.allTheThings() T-Shirt (Red)')]").as("First Product");
     private nameOfSecondProduct: Locator = locate ("//div[contains(text(),'Sauce Labs Onesie')]").as("Second Product");
@@ -14,17 +15,23 @@ class InventoryPage {
     private cartLink: Locator = locate ("//a[contains(@class,'shopping_cart_link')]").as("Cart Link");
     private productsCounter: Locator = locate ("//span[contains(@class,'shopping_cart_badge')]").as("Products Counter");
 
-    waitAllProducts () : void {
-        I.waitInUrl("/inventory");
+    constructor() {
+        super("/inventory");
+    }
+
+    waitForOpened () : InventoryPage {
+        super.waitForOpened();
+        return this;
     }
 
     sortAllProducts () : void {
         I.selectOption(this.dropdownButton, "Name (Z to A)");
     }
 
-    assertProducts (productsNames) {
-        I.see(this.nameOfFirstProduct, productsNames.firstProduct);
-        I.see(this.nameOfSecondProduct, productsNames.secondProduct);
+    assertProducts (productData: Product) : InventoryPage {
+        I.see(productData.firstProduct, this.nameOfFirstProduct);
+        I.see(productData.secondProduct, this.nameOfSecondProduct);
+        return this;
     }
 
     addProducts () : void {
@@ -36,13 +43,16 @@ class InventoryPage {
         I.waitForVisible(this.cartLink);
     }
 
-    assertCountOfProducts (numberOfProducts) {
-        I.see(this.productsCounter, numberOfProducts.countOfProducts);
+    assertCountOfProducts (productData: Product) : InventoryPage {
+        // @ts-ignore
+        I.see(this.productsCounter, productData.countOfProducts);
+        return this;
     }
 
     goToCart () : void {
         I.click(this.cartLink);
     }
 
-    // insert your locators and methods here
 }
+
+export default InventoryPage;

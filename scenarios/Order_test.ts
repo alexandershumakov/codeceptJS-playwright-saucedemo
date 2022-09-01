@@ -55,6 +55,7 @@ Before (({I, loginPage}) => {
 })
 
 Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
+
     let productData = Product.build();
     let userData = User.build();
 
