@@ -27,4 +27,4 @@ class LoginPage extends Page {
 
 }
 
-export default LoginPage;
+export = new LoginPage;

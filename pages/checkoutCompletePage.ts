@@ -29,4 +29,4 @@ class CheckoutCompletePage extends Page {
 
 }
 
-export default CheckoutCompletePage;
+export = new CheckoutCompletePage;

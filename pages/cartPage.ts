@@ -65,4 +65,4 @@ class CartPage extends Page {
     }
 }
 
-export default CartPage;
+export = new CartPage;

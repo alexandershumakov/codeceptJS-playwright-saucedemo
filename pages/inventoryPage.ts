@@ -55,4 +55,4 @@ class InventoryPage extends Page {
 
 }
 
-export default InventoryPage;
+export = new InventoryPage;

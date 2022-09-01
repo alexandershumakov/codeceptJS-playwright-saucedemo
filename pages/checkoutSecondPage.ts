@@ -32,4 +32,4 @@ class CheckoutSecondPage extends Page {
 
 }
 
-export default CheckoutSecondPage;
+export = new CheckoutSecondPage;

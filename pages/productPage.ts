@@ -20,16 +20,18 @@ class ProductPage extends Page {
         return this;
     }
 
-    openProductCard () : void {
+    openProductCard () : ProductPage {
         I.click(this.productName);
+        return this;
     }
 
     addProductToCart () : void {
         I.click(this.productAddButton);
     }
 
-    waitForVisible () : void {
+    waitForVisible () : ProductPage {
         I.waitForVisible(this.cartLink);
+        return this;
     }
 
     assertNumberOfProducts (productData: Product) : ProductPage {
@@ -44,4 +46,4 @@ class ProductPage extends Page {
 
 }
 
-export default ProductPage;
+export = new ProductPage;

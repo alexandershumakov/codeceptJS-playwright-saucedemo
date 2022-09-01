@@ -4,109 +4,44 @@ const User = require('../data/userFactory.ts');
 
 Feature('Order');
 
-// Scenario('first test', async ({I}) => {
-//     I.amOnPage('/');
-//     I.fillField("input#user-name", "standard_user");
-//     I.fillField("input#password", secret('secret_sauce'));
-//     I.click("input#login-button");
-//
-//     pause();
-//     let item = locate("div.inventory_item").withText("Sauce Labs Bolt T-Shirt");
-//     let price = await I.grabTextFrom(item.find("div.inventory_item_price").as("Item Price"));
-//     let name  = await I.grabTextFrom(item.find("div.inventory_item_name").as("Item Name"));
-//     let description = await I.grabTextFrom(item.find("div.inventory_item_desc").as("Item Desc"));
-//     I.click("//button[contains(@id,'add-to-cart-sauce-labs-bolt-t-shirt')]");
-//
-//     pause();
-//     I.waitForVisible(".shopping_cart_badge");
-//     I.see("1", ".shopping_cart_badge");
-//     I.click("a.shopping_cart_link");
-//
-//
-//     I.waitInUrl("/cart");
-//     I.seeNumberOfVisibleElements("div.cart.item", 1);
-//     I.see(name, locate ("div.cart_item div.inventory_item_name").first());
-//     I.see(description, locate ("div.cart_item div.inventory_item_desc").first());
-//     I.see("1", locate ("div.cart_item div.cart_quantity").first());
-//     I.click("button#checkout");
-//     I.waitInUrl("/checkout-step-one");
-//     I.fillField("input#first-name", "Test Name");
-//     I.fillField("input#first-name", "Test LAst Name");
-//     I.fillField("input#postal-code", "40030");
-//     I.click("input#continue");
-//
-//     I.waitInUrl("/checkout-step-two");
-//     I.seeNumberOfVisibleElements("div.cart.item", 1);
-//     I.see(name, locate ("div.cart_item div.inventory_item_name").first());
-//     I.see(description, locate ("div.cart_item div.inventory_item_desc").first());
-//     I.see("1", locate ("div.cart_item div.cart_quantity").first());
-//     I.see(price, locate ("div.cart_item div.inventory_item_name").first());
-//
-//     pause();
-//
-//     I.click("button#finish");
-//     I.waitInUrl("/checkout-complete");
-//     I.see("THANK YOU FOR YOUR ORDER", "h2.complete-header");
-//
-// });
-
 Before (({I, loginPage}) => {
     I.login("standard_user", secret('secret_sauce'));
 })
 
-Scenario("second test", ({I, loginPage, productPage, cartPage, checkoutFirstPage, checkoutSecondPage, checkoutCompletePage, inventoryPage } ) => {
+Scenario("second test", ({I,
+                             loginPage,
+                             productPage,
+                             cartPage,
+                             checkoutFirstPage,
+                             checkoutSecondPage,
+                             checkoutCompletePage,
+                             inventoryPage} ) => {
 
-    let productData = Product.build();
-    let userData = User.build();
+    let productData = new Product;
+    let userData = new User;
 
-    productPage.openProductCard();
-    productPage.waitForOpened();
-    productPage.addProductToCart();
-    productPage.waitForVisible();
-    productPage.assertNumberOfProducts(productData);
-    productPage.goToCart();
-
-    cartPage.openCart();
-    cartPage.assertProduct(productData);
-    cartPage.completeProduct();
-
-    checkoutFirstPage.waitForOpened();
-    checkoutFirstPage.fillAddress(userData);
-
-    checkoutSecondPage.waitCheckoutSecondPage();
-    checkoutSecondPage.assertProduct(productData);
-    checkoutSecondPage.checkProduct();
-
-    checkoutCompletePage.waitForOpened();
-    checkoutCompletePage.assertCompleteOrder();
-    checkoutCompletePage.completeOrder();
-
-    inventoryPage.waitAllProducts();
+    productPage.openProductCard().waitForOpened().addProductToCart();
+    productPage.waitForVisible().assertNumberOfProducts(productData).goToCart();
+    cartPage.openCart().assertProduct(productData).completeProduct();
+    checkoutFirstPage.waitForOpened().fillAddress(userData);
+    checkoutSecondPage.waitCheckoutSecondPage().assertProduct(productData).checkProduct();
+    checkoutCompletePage.waitForOpened().assertCompleteOrder().completeOrder();
+    inventoryPage.waitForOpened();
 
 }).tag("test1")
 
-Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
+Scenario("second test", ({I,
+                             loginPage,
+                             inventoryPage,
+                             cartPage}) => {
 
-    let productsNames = {
-        firstProduct: "Test.allTheThings() T-Shirt (Red)",
-        secondProduct: "Sauce Labs Onesie"}
+    let productData = new Product;
 
-    let numberOfProducts = {
-        countOfProducts: "2",
-        countOfProducts2: "1" }
-
-    inventoryPage.waitAllProducts();
-    inventoryPage.sortAllProducts();
-    inventoryPage.assertProducts(productsNames);
-    inventoryPage.addProducts();
-    inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts(numberOfProducts);
-    inventoryPage.goToCart();
-
+    inventoryPage.waitAllProducts().sortAllProducts().assertProducts(productData).addProducts().waitForVisible().assertCountOfProducts(productData).goToCart();
     cartPage.openCart();
-    cartPage.assertTwoProducts(productsNames);
+    cartPage.assertTwoProducts(productData);
     cartPage.removeFirstProduct();
-    cartPage.assertCountOfProducts(numberOfProducts);
+    cartPage.assertCountOfProducts(productData);
     cartPage.removeSecondProduct();
     cartPage.returnToProductPage();
 
@@ -114,7 +49,94 @@ Scenario("third test", ({I, loginPage, inventoryPage, cartPage}) => {
 
 }).tag("test2")
 
+Scenario("third test", ({I,
+                            loginPage,
+                            inventoryPage,
+                            cartPage,
+                            checkoutFirstPage,
+                            checkoutSecondPage,
+                            checkoutCompletePage}) => {
+
+    let productData = Product.build();
+    let userData = User.build();
+
+    inventoryPage.waitAllProducts();
+    inventoryPage.assertProducts2(productData);
+    inventoryPage.addProducts2();
+    inventoryPage.waitForVisible();
+    inventoryPage.assertCountOfProducts2(productData);
+    inventoryPage.goToCart();
+
+    cartPage.openCart();
+    cartPage.assertTwoProducts2(productData);
+    cartPage.removeSecondProduct2();
+    cartPage.assertCountOfProducts2(productData);
+    cartPage.completeProduct();
+
+    checkoutFirstPage.waitForOpened();
+    checkoutFirstPage.fillAddress(userData);
+
+    checkoutSecondPage.waitCheckoutSecondPage();
+    checkoutSecondPage.assertProduct2(productData);
+    checkoutSecondPage.checkProduct();
+
+    checkoutCompletePage.waitForOpened();
+    checkoutCompletePage.assertCompleteOrder();
+    checkoutCompletePage.completeOrder();
+
+    loginPage.waitForOpen();
+
+}).tag("test3")
+
+Scenario("4 test", ({I,
+                        loginPage,
+                        inventoryPage,
+                        cartPage,
+                        checkoutFirstPage,
+                        checkoutSecondPage,
+                        checkoutCompletePage}) => {
+
+    let productData = Product.build();
+    let userData = User.build();
+
+    inventoryPage.waitAllProducts();
+    inventoryPage.assertProducts3(productData);
+    inventoryPage.addProducts2();
+    inventoryPage.waitForVisible();
+    inventoryPage.assertCountOfProducts2(productData);
+    inventoryPage.goToCart();
+
+    cartPage.openCart();
+    cartPage.assertTwoProducts2(productData);
+    cartPage.removeSecondProduct2();
+    cartPage.assertCountOfProducts(productData);
+    cartPage.continueShopping();
+
+    inventoryPage.waitAllProducts();
+    inventoryPage.addProduct3();
+    inventoryPage.goToCart();
+
+    cartPage.openCart();
+    cartPage.assertTwoProducts3(productData);
+    cartPage.completeProduct();
+
+    checkoutFirstPage.waitForOpened();
+    checkoutFirstPage.fillAddress(userData);
+
+    checkoutSecondPage.waitCheckoutSecondPage();
+    checkoutSecondPage.assertProduct2(productData);
+    checkoutSecondPage.assertProduct3(productData);
+    checkoutSecondPage.checkProduct();
+
+    checkoutCompletePage.waitForOpened();
+    checkoutCompletePage.assertCompleteOrder();
+    checkoutCompletePage.completeOrder();
+
+    loginPage.waitForOpen();
+
+}).tag("test4")
+
+
 After(async ({I}) => {
     await I.say("Test ended");
 })
-

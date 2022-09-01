@@ -31,4 +31,4 @@ class CheckoutFirstPage extends Page {
 
 }
 
-export default CheckoutFirstPage;
+export = new CheckoutFirstPage;
