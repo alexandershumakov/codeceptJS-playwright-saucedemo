@@ -24,8 +24,9 @@ class InventoryPage extends Page {
         return this;
     }
 
-    sortAllProducts () : void {
+    sortAllProducts () : InventoryPage {
         I.selectOption(this.dropdownButton, "Name (Z to A)");
+        return this;
     }
 
     assertProducts (productData: Product) : InventoryPage {
@@ -39,8 +40,9 @@ class InventoryPage extends Page {
         I.click(this.secondProductButton);
     }
 
-    waitForVisible () : void {
+    waitForVisible () : InventoryPage {
         I.waitForVisible(this.cartLink);
+        return this;
     }
 
     assertCountOfProducts (productData: Product) : InventoryPage {

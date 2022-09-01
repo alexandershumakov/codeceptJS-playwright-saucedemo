@@ -22,10 +22,11 @@ Scenario("second test", ({I,
 
     productPage.openProductCard().waitForOpened().addProductToCart();
     productPage.waitForVisible().assertNumberOfProducts(productData).goToCart();
-    cartPage.openCart().assertProduct(productData).completeProduct();
+    cartPage.waitForOpened().assertProduct(productData).completeProduct();
     checkoutFirstPage.waitForOpened().fillAddress(userData);
-    checkoutSecondPage.waitCheckoutSecondPage().assertProduct(productData).checkProduct();
-    checkoutCompletePage.waitForOpened().assertCompleteOrder().completeOrder();
+    checkoutSecondPage.waitForOpened().assertProduct(productData).checkProduct();
+    checkoutCompletePage.waitForOpened().assertCompleteOrder();
+    checkoutCompletePage.completeOrder();
     inventoryPage.waitForOpened();
 
 }).tag("test1")
@@ -37,12 +38,10 @@ Scenario("second test", ({I,
 
     let productData = new Product;
 
-    inventoryPage.waitAllProducts().sortAllProducts().assertProducts(productData).addProducts().waitForVisible().assertCountOfProducts(productData).goToCart();
-    cartPage.openCart();
-    cartPage.assertTwoProducts(productData);
-    cartPage.removeFirstProduct();
-    cartPage.assertCountOfProducts(productData);
-    cartPage.removeSecondProduct();
+    inventoryPage.waitForOpened().sortAllProducts().assertProducts(productData).addProducts();
+    inventoryPage.waitForVisible().assertCountOfProducts(productData).goToCart();
+    cartPage.waitForOpened().assertTwoProducts(productData).removeFirstProduct();
+    cartPage.assertCountOfProducts(productData).removeSecondProduct();
     cartPage.returnToProductPage();
 
     loginPage.waitForOpen();
@@ -60,7 +59,7 @@ Scenario("third test", ({I,
     let productData = Product.build();
     let userData = User.build();
 
-    inventoryPage.waitAllProducts();
+    inventoryPage.waitForOpened();
     inventoryPage.assertProducts2(productData);
     inventoryPage.addProducts2();
     inventoryPage.waitForVisible();

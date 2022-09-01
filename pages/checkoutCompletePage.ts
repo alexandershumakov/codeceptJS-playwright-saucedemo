@@ -22,8 +22,9 @@ class CheckoutCompletePage extends Page {
         I.see("THANK YOU FOR YOUR ORDER", this.completeTitle);
     }
 
-    completeOrder () : void {
+    completeOrder () : CheckoutCompletePage {
         I.click(this.backToProductsButton);
+        return this;
     }
 
 
