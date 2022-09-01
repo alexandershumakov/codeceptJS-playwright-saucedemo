@@ -62,7 +62,7 @@ Scenario("third test", ({I,
     inventoryPage.assertProducts2(productData);
     inventoryPage.addProducts2();
     inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts2(productData);
+    inventoryPage.assertCountOfProducts(productData);
     inventoryPage.goToCart();
 
     cartPage.waitForOpened();
@@ -101,7 +101,7 @@ Scenario("4 test", ({I,
     inventoryPage.assertProducts3(productData);
     inventoryPage.addProducts2();
     inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts2(productData);
+    inventoryPage.assertCountOfProducts(productData);
     inventoryPage.goToCart();
 
     cartPage.waitForOpened();

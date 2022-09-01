@@ -35,9 +35,31 @@ class InventoryPage extends Page {
         return this;
     }
 
+    assertProducts2 (productData: Product) : InventoryPage {
+        I.see(productData.firstProduct2, this.nameOfFirstProduct2);
+        I.see(productData.secondProduct2, this.nameOfSecondProduct2);
+        return this;
+    }
+
+    assertProducts3 (productData: Product) : InventoryPage {
+        I.see(productData.nameFirstProduct, this.nameOfFirstProduct2);
+        I.see(productData.nameSecondProduct, this.nameOfSecondProduct2);
+        return this;
+    }
+
+
     addProducts () : void {
         I.click(this.firstProductButton);
         I.click(this.secondProductButton);
+    }
+
+    addProducts2 () : void {
+        I.click(this.firstProductButton2);
+        I.click(this.secondProductButton2);
+    }
+
+    addProduct3 () : void {
+        I.click(this.productButton);
     }
 
     waitForVisible () : InventoryPage {
