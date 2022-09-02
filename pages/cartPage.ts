@@ -51,14 +51,16 @@ class CartPage extends Page {
         return this;
     }
 
-    assertTwoProducts2 (productData) {
+    assertTwoProducts2 (productData: Product) : CartPage {
         I.see(productData.firstProduct2, this.nameOfFirstProduct2);
         I.see(productData.secondProduct2, this.nameOfSecondProduct2);
+        return this;
     }
 
-    assertTwoProducts3 (productData) {
+    assertTwoProducts3 (productData: Product) : CartPage {
         I.see(productData.nameFirstProduct, this.nameOfFirstProduct2);
         I.see(productData.nameThirdProduct, this.nameOfThirdProduct2);
+        return this;
     }
 
     removeFirstProduct () : void {
@@ -74,7 +76,7 @@ class CartPage extends Page {
         I.click(this.removeButtonForSecondProduct);
     }
 
-    removeSecondProduct2 () {
+    removeSecondProduct2 () : void {
         I.click(this.removeButtonForSecondProduct2);
     }
 
