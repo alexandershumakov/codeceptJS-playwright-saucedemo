@@ -58,31 +58,16 @@ Scenario("third test", ({I,
     let productData = new Product;
     let userData = new User;
 
-    inventoryPage.waitForOpened();
-    inventoryPage.assertProducts2(productData);
-    inventoryPage.addProducts2();
-    inventoryPage.waitForVisible();
-    inventoryPage.assertCountOfProducts(productData);
-    inventoryPage.goToCart();
-
-    cartPage.waitForOpened();
-    cartPage.assertTwoProducts2(productData);
-    cartPage.removeSecondProduct2();
-    cartPage.assertCountOfProducts(productData);
-    cartPage.completeProduct();
-
-    checkoutFirstPage.waitForOpened();
-    checkoutFirstPage.fillAddress(userData);
-
-    checkoutSecondPage.waitForOpened();
-    checkoutSecondPage.assertProduct2(productData);
-    checkoutSecondPage.checkProduct();
-
-    checkoutCompletePage.waitForOpened();
-    checkoutCompletePage.assertCompleteOrder();
+    inventoryPage.waitForOpened().assertProducts2(productData).addProducts2();
+    inventoryPage.waitForVisible().assertCountOfProducts(productData).goToCart();
+    cartPage.waitForOpened().assertTwoProducts2(productData).removeSecondProduct2();
+    cartPage.assertCountOfProducts(productData).completeProduct();
+    checkoutFirstPage.waitForOpened().fillAddress(userData);
+    checkoutSecondPage.waitForOpened().assertProduct2(productData).checkProduct();
+    checkoutCompletePage.waitForOpened().assertCompleteOrder();
     checkoutCompletePage.completeOrder();
 
-    loginPage.waitForOpen();
+    loginPage.waitForOpened();
 
 }).tag("test3")
 
@@ -100,30 +85,21 @@ Scenario("4 test", ({I,
     inventoryPage.waitForOpened().assertProducts3(productData).addProducts2();
     inventoryPage.waitForVisible().assertCountOfProducts(productData).goToCart();
 
-    cartPage.waitForOpened();
-    cartPage.assertTwoProducts2(productData);
-    cartPage.removeSecondProduct2();
-    cartPage.assertCountOfProducts(productData);
-    cartPage.continueShopping();
+    cartPage.waitForOpened().assertTwoProducts2(productData).removeSecondProduct2();
+    cartPage.assertCountOfProducts(productData).continueShopping();
 
-    inventoryPage.waitForOpened();
-    inventoryPage.addProduct3();
+    inventoryPage.waitForOpened().addProduct3();
     inventoryPage.goToCart();
 
-    cartPage.waitForOpened();
-    cartPage.assertTwoProducts3(productData);
+    cartPage.waitForOpened().assertTwoProducts3(productData);
     cartPage.completeProduct();
 
-    checkoutFirstPage.waitForOpened();
-    checkoutFirstPage.fillAddress(userData);
+    checkoutFirstPage.waitForOpened().fillAddress(userData);
 
-    checkoutSecondPage.waitForOpened();
-    checkoutSecondPage.assertProduct2(productData);
-    checkoutSecondPage.assertProduct3(productData);
+    checkoutSecondPage.waitForOpened().assertProduct2(productData).assertProduct3(productData);
     checkoutSecondPage.checkProduct();
 
-    checkoutCompletePage.waitForOpened();
-    checkoutCompletePage.assertCompleteOrder();
+    checkoutCompletePage.waitForOpened().assertCompleteOrder();
     checkoutCompletePage.completeOrder();
 
     loginPage.waitForOpened();
