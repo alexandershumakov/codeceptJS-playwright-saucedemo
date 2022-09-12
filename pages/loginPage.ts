@@ -18,7 +18,7 @@ class LoginPage extends Page {
         return this;
     }
 
-    login (username, password) : LoginPage {
+    login (username, password): LoginPage {
         I.fillField(this.userNameField, username);
         I.fillField(this.passwordField, password);
         I.click(this.loginButton);
