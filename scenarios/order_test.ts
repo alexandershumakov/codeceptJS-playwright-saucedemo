@@ -1,6 +1,7 @@
-const {faker} = require('@faker-js/faker');
-const Product = require('../data/productFactory.ts');
-const User = require('../data/userFactory.ts');
+import User from "../data/userFactory";
+import Product from "../data/productFactory";
+
+
 
 Feature('Order');
 
@@ -8,7 +9,7 @@ Before (({I, loginPage}) => {
     I.login("standard_user", secret('secret_sauce'));
 })
 
-Scenario("second test", ({I,
+Scenario("1 test", ({I,
                              loginPage,
                              productPage,
                              cartPage,
@@ -17,8 +18,10 @@ Scenario("second test", ({I,
                              checkoutCompletePage,
                              inventoryPage} ) => {
 
-    let productData = new Product;
+    let newProductData = new Product;
+    let productData = newProductData.build();
     let userData = new User;
+
 
     productPage.openProductCard().waitForOpened().addProductToCart();
     productPage.waitForVisible().assertNumberOfProducts(productData).goToCart();
@@ -31,7 +34,7 @@ Scenario("second test", ({I,
 
 }).tag("test1")
 
-Scenario("second test", ({I,
+Scenario("2 test", ({I,
                              loginPage,
                              inventoryPage,
                              cartPage}) => {
@@ -47,7 +50,7 @@ Scenario("second test", ({I,
 
 }).tag("test2")
 
-Scenario("third test", ({I,
+Scenario("3 test", ({I,
                             loginPage,
                             inventoryPage,
                             cartPage,
